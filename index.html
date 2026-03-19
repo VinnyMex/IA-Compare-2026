@@ -1890,16 +1890,7 @@ button { cursor: pointer; font-family: var(--font-body); }
           <button class="search-btn" id="toolSearchBtn">Buscar</button>
         </div>
 
-        <button class="api-key-toggle" id="apiKeyToggle">
-          <span>⚙️</span> Configurar API Key <span class="chevron">▼</span>
-        </button>
-
-        <div class="api-key-section" id="apiKeySection">
-          <input type="password" class="api-key-input" id="apiKeyInput" value="••••••••••••••••" placeholder="Configurado via Vercel AI Gateway" disabled>
-          <p class="api-key-info">
-            Segurança ativada: Sua chave está protegida no servidor Vercel.
-          </p>
-        </div>
+        <div class="search-status" id="searchStatus"></div>
 
         <div class="search-status" id="searchStatus"></div>
       </div>
@@ -2565,21 +2556,9 @@ function observeCards() {
 /* ============================================
    ADD TOOL - PERPLEXITY API
    ============================================ */
-document.getElementById('apiKeyToggle').addEventListener('click', () => {
-  const section = document.getElementById('apiKeySection');
-  section.classList.toggle('open');
-});
 
 async function searchAITool(toolName) {
-  const apiKey = document.getElementById('apiKeyInput').value.trim();
   const status = document.getElementById('searchStatus');
-  
-  if (!apiKey) {
-    status.className = 'search-status visible';
-    status.innerHTML = `<span class="search-error">⚠ Configure sua API key do Perplexity para buscar ferramentas em tempo real. <a href="https://docs.perplexity.ai/" target="_blank" rel="noopener noreferrer">Obtenha sua chave →</a></span>`;
-    document.getElementById('apiKeySection').classList.add('open');
-    return;
-  }
 
   // Show loading
   status.className = 'search-status visible';
